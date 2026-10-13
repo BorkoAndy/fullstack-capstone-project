@@ -5,8 +5,6 @@ const cors = require('cors');
 const pinoLogger = require('./logger');
 
 const connectToDatabase = require('./models/db');
-// Removed: const {loadData} = require("./util/import-mongo/index");
-// It is unused here, and requiring it runs the import script on every start.
 
 const app = express();
 app.use("*", cors());
@@ -26,7 +24,7 @@ app.use(express.json());
 const giftRoutes = require('./routes/giftRoutes');
 
 // Search API Task 1: import the searchRoutes and store in a constant called searchRoutes
-// const searchRoutes = require('./routes/searchRoutes');   // later lab, leave commented for now
+const searchRoutes = require('./routes/searchRoutes');
 
 
 const pinoHttp = require('pino-http');
@@ -39,7 +37,7 @@ app.use(pinoHttp({ logger }));
 app.use('/api/gifts', giftRoutes);
 
 // Search API Task 2: add the searchRoutes to the server by using the app.use() method.
-// app.use('/api/search', searchRoutes);   // later lab, leave commented for now
+app.use('/api/search', searchRoutes);
 
 
 // Global Error Handler
